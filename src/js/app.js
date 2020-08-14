@@ -1,10 +1,9 @@
-const { default: FormHandler } = require("./formHandler");
+import FormHandler from './formHandler';
 
-let btn_search = document.getElementById('btnSearch');
+let formSearch = document.getElementById('formSearch');
 let input_search = document.getElementById('inputSearch');
 
-let formHandler = new FormHandler(input_search,btn_search);
+let formHandler = new FormHandler();
 
-formHandler.addInputValue(input_search,btn_search)
+formHandler.addInputValue(formSearch,input_search)
 
-//formHandler.value(input_search);
