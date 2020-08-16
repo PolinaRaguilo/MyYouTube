@@ -1,16 +1,20 @@
 class FormHandler{
-  constructor(form, field, btn) {
+  constructor(form, field) {
     this.form = form;
     this.field = field;
   }
-  addInputValue(form,field){
+  formSubmit(form,cb){
     form.addEventListener('submit', function(e){
-      e.preventDefault();
-      let text = field.value;
-      console.log(text)
-      return text;
+       e.preventDefault();
+      cb();
     })
   }
+  inputValue(field,cb){
+    field.addEventListener('input', function(e){
+      cb();
+    })
+  }
+
 }
 
 export default FormHandler;
