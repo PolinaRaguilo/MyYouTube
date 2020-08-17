@@ -19,26 +19,44 @@ export default class VideoSearch{
         let video = `
         <div class="oneVideoBlock">
           <div class="imgVideo">
-            <img src="https://static.affinity-petcare.com/advance/cdn/farfuture/ddBna0_SjS76_L2uPgcnqwezEHIIlctMaLVd1HXTA64/drupal-cache:qe4ik6/sites/default/files/styles/article-list/public/field/image/16-bosque_noruega.jpeg?itok=LXSxp1mE" alt="альтернативный текст" class="littleVideos">
+            <iframe src="http://www.youtube.com/embed/${videoId}" class="littleVideos"></iframe>
           </div>
-          <div className="detailsInf">
-            <h3 class="titleMain">${title}</h3>
+          <div class="detailsInf">
+            <a href='#'><h3 class="titleMain">${title}</h3></a>
             <h4 class="channeleMain">${channelTitle}</h4>
-            <div className="detailsLikesDislikes">
+            <div class="detailsLikesDislikes">
             </div>
           </div>
         </div>
         `
+        
         videos.append(video);
+        this.videoStatistics(key,videoId)
         console.log(item)
      }))
   }
-  videoStatistics(key,idVideo){
-     $.get(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${idVideo}&key=${key}`)
-     
+  videoStatistics(Gkey,idVideo){
+    let statistics = $(".detailsLikesDislikes");
+    $(".detailsLikesDislikes").empty();
+
+     $.get(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${idVideo}&key=${Gkey}`)
+      .then((data) => data.items.forEach((item) =>{
+        let likes = item.statistics.likeCount;
+        let dislikes = item.statistics.dislikeCount;
+        let views = item.statistics.viewCount;
+
+        let singleStatistic = `
+          <h3> likes ${likes}</h3>
+          <h3> dis ${dislikes}</h3>
+          <h3>views ${views}</h3>
+        `
+        statistics.append(singleStatistic);
+        console.log(item)
+      }))
 
   }
   channelImg(key, idChannel){
 
   }
 }
+

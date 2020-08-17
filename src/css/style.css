@@ -1,3 +1,7 @@
+
+*{
+  font-family: 'Lucida Sans Unicode';
+}
 .container{
   height: 80px;
   padding: 0 15px;
@@ -25,7 +29,7 @@
   background: #F9F0DA;
   padding-left: 15px;
   font-size: 20px;
-  font-family: 'Lucida Sans Unicode';
+
 }
 
 .btn_search{
@@ -59,16 +63,25 @@
 .littleVideos{
   float: left;
   margin: 13px 25px 12px 25px;
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 400px;
 }
 
 .titleMain{
   font-size: 25px;
-  text-align: left;
-  
+  text-align: left;  
 }
 
 .channeleMain{
   font-size: 18px;
 }
+
+a{
+  text-decoration: none;
+  color: #4C0128;
+}
+
+a:hover{
+  color: #007CFA;
+}
+
