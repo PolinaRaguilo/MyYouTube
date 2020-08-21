@@ -9,10 +9,9 @@ export default class VideoSearch{
     let videos = $("#videoList");
     $("#videoList").empty();
  
-    $.get(`https://www.googleapis.com/youtube/v3/search?key=${key}&type=video&part=snippet&maxResults=${maxRes}&q=${text}`)
+    $.get(`https://www.googleapis.com/youtube/v3/search?key=${key}&type=video&part=snippet&order=viewCount&maxResults=${maxRes}&q=${text}`)
      .then((data) => data.items.forEach((item) => {
        let title = item.snippet.title;
-       let channelTitle = item.snippet.channelTitle;
        let videoId = item.id.videoId;
        let channelId = item.snippet.channelId;
 
@@ -23,7 +22,7 @@ export default class VideoSearch{
           </div>
           <div class="detailsInf">
             <a href='#'><h3 class="titleMain">${title}</h3></a>
-            <h4 class="channeleMain">${channelTitle}</h4>
+            <div class="channelInf"></div>
             <div class="detailsLikesDislikes">
             </div>
           </div>
@@ -31,9 +30,11 @@ export default class VideoSearch{
         `
         
         videos.append(video);
+        this.channelImg(key, channelId)
         this.videoStatistics(key,videoId)
-        console.log(item)
+        //console.log(item)
      }))
+     .catch((err) => console.log(`Что-то пошло не так ${err}`))
   }
   videoStatistics(Gkey,idVideo){
     let statistics = $(".detailsLikesDislikes");
@@ -46,17 +47,33 @@ export default class VideoSearch{
         let views = item.statistics.viewCount;
 
         let singleStatistic = `
-          <h3> likes ${likes}</h3>
-          <h3> dis ${dislikes}</h3>
-          <h3>views ${views}</h3>
+          <h3><i class="fas fa-thumbs-up"></i>  ${likes}</h3>
+          <h3><i class="fas fa-thumbs-down"></i> ${dislikes}</h3>
+          <h3><i class="fas fa-eye"></i> ${views}</h3>
         `
         statistics.append(singleStatistic);
-        console.log(item)
+        //console.log(item)
       }))
+      .catch((err) => console.log(`Что-то пошло не так ${err}`))
 
   }
   channelImg(key, idChannel){
-
+    let imageCh = $(".channelInf");
+    $(".channelInf").empty();
+    $.get(`https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${idChannel}&key=${key}`)
+    .then((data)=> data.items.forEach((item)=>{
+      console.log(item)
+      let image = item.snippet.thumbnails.high;
+      let channelTitle = item.snippet.localized.title;
+      let imgChannel = ` 
+      <h3>${channelTitle}</h3>
+      <img src="${image}">`
+     imageCh.append(imgChannel)
+     console.log(image)
+    }))
   }
 }
+
+
+
 

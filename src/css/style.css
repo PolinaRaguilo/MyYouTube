@@ -85,3 +85,27 @@ a:hover{
   color: #007CFA;
 }
 
+.fa-thumbs-up::before{
+  color: grey;
+  font-size: 27px;
+}
+
+.fa-thumbs-down::before{
+  color: grey;
+  font-size: 27px;
+}
+
+.fa-eye::before{
+  color: grey;
+  font-size: 27px;
+}
+
+.detailsLikesDislikes{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.channelInf{
+  display: flex;
+}

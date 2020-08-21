@@ -14,6 +14,11 @@ class FormHandler{
       cb();
     })
   }
+  bigVideo(a,cb){
+    a.addEventListener('click',function(e){
+      cb();
+    })
+  }
 
 }
 
