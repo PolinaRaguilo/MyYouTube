@@ -1,4 +1,7 @@
-import $ from 'jquery'
+import $ from 'jquery';
+import RenderResults from './render';
+
+let results = new RenderResults();
 
 export default class VideoSearch{
   constructor(key, searchText) {
@@ -15,19 +18,21 @@ export default class VideoSearch{
        let videoId = item.id.videoId;
        let channelId = item.snippet.channelId;
 
-        let video = `
-        <div class="oneVideoBlock">
-          <div class="imgVideo">
-            <iframe src="http://www.youtube.com/embed/${videoId}" class="littleVideos"></iframe>
-          </div>
-          <div class="detailsInf">
-            <a href='#'><h3 class="titleMain">${title}</h3></a>
-            <div class="channelInf"></div>
-            <div class="detailsLikesDislikes">
-            </div>
-          </div>
-        </div>
-        `
+       let video = results.showListVideos(videoId, title);
+
+        // let video = `
+        // <div class="oneVideoBlock">
+        //   <div class="imgVideo">
+        //     <iframe src="http://www.youtube.com/embed/${videoId}" class="littleVideos"></iframe>
+        //   </div>
+        //   <div class="detailsInf">
+        //     <a href='#'><h3 class="titleMain">${title}</h3></a>
+        //     <div class="channelInf"></div>
+        //     <div class="detailsLikesDislikes">
+        //     </div>
+        //   </div>
+        // </div>
+        // `
         
         videos.append(video);
         this.channelImg(key, channelId)
@@ -36,6 +41,7 @@ export default class VideoSearch{
      }))
      .catch((err) => console.log(`Что-то пошло не так ${err}`))
   }
+
   videoStatistics(Gkey,idVideo){
     let statistics = $(".detailsLikesDislikes");
     $(".detailsLikesDislikes").empty();
@@ -46,11 +52,13 @@ export default class VideoSearch{
         let dislikes = item.statistics.dislikeCount;
         let views = item.statistics.viewCount;
 
-        let singleStatistic = `
-          <h3><i class="fas fa-thumbs-up"></i>  ${likes}</h3>
-          <h3><i class="fas fa-thumbs-down"></i> ${dislikes}</h3>
-          <h3><i class="fas fa-eye"></i> ${views}</h3>
-        `
+        let singleStatistic = results.showSingleStatistic(likes, dislikes, views);
+
+        // let singleStatistic = `
+        //   <h3><i class="fas fa-thumbs-up"></i>  ${likes}</h3>
+        //   <h3><i class="fas fa-thumbs-down"></i> ${dislikes}</h3>
+        //   <h3><i class="fas fa-eye"></i> ${views}</h3>
+        // `
         statistics.append(singleStatistic);
         //console.log(item)
       }))
@@ -65,11 +73,15 @@ export default class VideoSearch{
       console.log(item)
       let image = item.snippet.thumbnails.high;
       let channelTitle = item.snippet.localized.title;
-      let imgChannel = ` 
-      <h3>${channelTitle}</h3>
-      <img src="${image}">`
+
+      let imgChannel = results.showImage(channelTitle, image)
+
+      // let imgChannel = ` 
+      // <h3>${channelTitle}</h3>
+      // <img src="${image}">`
+
      imageCh.append(imgChannel)
-     console.log(image)
+     //console.log(image)
     }))
   }
 }
