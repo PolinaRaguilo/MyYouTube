@@ -6,14 +6,15 @@ export default class RenderResults {
     this.title = title;
   }
 
-  showListVideos(videoId, title){
+  showListVideos(urlImg, title, channelTitle){
     let list = `
         <div class="oneVideoBlock">
           <div class="imgVideo">
-            <iframe src="http://www.youtube.com/embed/${videoId}" class="littleVideos"></iframe>
+            <img src="${urlImg}" alt="" class="littleVideos"/>
           </div>
           <div class="detailsInf">
             <a href='#'><h3 class="titleMain">${title}</h3></a>
+            <h2>Channel: ${channelTitle}</h2>
             <div class="channelInf"></div>
             <div class="detailsLikesDislikes">
             </div>
@@ -22,19 +23,15 @@ export default class RenderResults {
         `
     return list;
   }
-  showSingleStatistic(likes, dislikes, views){
-    let statistic = `
-          <h3><i class="fas fa-thumbs-up"></i>  ${likes}</h3>
-          <h3><i class="fas fa-thumbs-down"></i> ${dislikes}</h3>
-          <h3><i class="fas fa-eye"></i> ${views}</h3>
-        `
-    return statistic;
-  }
+  
+  // showSingleStatistic(likes, dislikes, views){
+  //   let statistic = `
+  //         <h3><i class="fas fa-thumbs-up"></i>  ${likes}</h3>
+  //         <h3><i class="fas fa-thumbs-down"></i> ${dislikes}</h3>
+  //         <h3><i class="fas fa-eye"></i> ${views}</h3>
+  //       `
+  //   return statistic;
+  // }
 
-  showImage(channelTitle, image){
-    let imageChannel = ` 
-      <h3>${channelTitle}</h3>
-      <img src="${image}">`
-    return imageChannel;
-  }
+
 }

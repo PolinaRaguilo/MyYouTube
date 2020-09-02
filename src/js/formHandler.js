@@ -6,6 +6,7 @@ class FormHandler{
   formSubmit(form,cb){
     form.addEventListener('submit', function(e){
        e.preventDefault();
+     // let text = input.value;
       cb();
     })
   }
@@ -14,12 +15,6 @@ class FormHandler{
       cb();
     })
   }
-  bigVideo(a,cb){
-    a.addEventListener('click',function(e){
-      cb();
-    })
-  }
-
 }
 
 export default FormHandler;
