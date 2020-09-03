@@ -1,13 +1,15 @@
+import $ from 'jquery';
+
 class FormHandler{
-  constructor(form, field) {
-    this.form = form;
-    this.field = field;
+  constructor(formSelector, inputSelector) {
+    this.$form = $(formSelector);
+    this.$field = $(inputSelector);
   }
-  formSubmit(form,cb){
-    form.addEventListener('submit', function(e){
-       e.preventDefault();
-     // let text = input.value;
-      cb();
+  formSubmit(cb){
+    this.$form.on('submit', e => {
+      e.preventDefault();
+      const query = this.$field.val();
+      cb(query);
     })
   }
   inputValue(field,cb){
