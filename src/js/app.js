@@ -22,20 +22,11 @@ let render = new Render('divVideo')
 formHandler.formSubmit(function(e){
   let videos = $("#videoList");
     $("#videoList").empty();
-    let text = inputSearch.value;
-   return  search.getAllVideos(API_KEY,text,20)
+   return  search.getAllVideos(API_KEY,20)
             .then(data =>{
+              console.log(data)
               render.addRow(data)
-              //console.log(data);
-              //  data.items.forEach((item) => {
-              // let title = item.snippet.title;
-              // let urlImg = item.snippet.thumbnails.high.url;
-              // let channelTitle = item.snippet.channelTitle;
 
-              
-              // let video = resultsRender.showListVideos(urlImg, title,channelTitle);
-              // videos.append(video);
-              // })
             })
 
 });

@@ -15,7 +15,7 @@ class RenderListVideo {
   constructor(data){
     this.data = data;
 
-    const out = this.data.items.forEach((item) =>{
+    const out = this.data.items.reduce((acc, item) =>{
       const{
         id: {
           idVideo
@@ -31,7 +31,7 @@ class RenderListVideo {
           }
         } 
       } = item;
-     let elementInsert = ` <div class="oneVideoBlock">
+     acc += ` <div class="oneVideoBlock">
           <div class="imgVideo">
             <img src="${url}" alt="" class="littleVideos"/>
           </div>
@@ -42,11 +42,12 @@ class RenderListVideo {
             <div class="detailsLikesDislikes">
             </div>
           </div>
-        </div>`
-        return elementInsert;
-   
-    })
-    
+        </div>`;
+        return acc;  
+    }, '');
+    this.$element = `<div id="videoList" > ${out}</div>`
+    console.log(this.$element)
+
   }
 }
 
