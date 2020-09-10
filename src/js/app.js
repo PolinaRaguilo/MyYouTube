@@ -16,12 +16,10 @@ const API_KEY = 'AIzaSyAAaRTRDYc93q5agWzuOe-rEvgBD83PXEM';
 let search = new VideoSearch();
 let formHandler = new FormHandler(formSearch, inputSearch);
 // let resultsRender = new RenderResults();
-let render = new Render('divVideo')
+let render = new Render(divVideo)
 
 
-formHandler.formSubmit(function(e){
-  let videos = $("#videoList");
-    $("#videoList").empty();
+formHandler.formSubmit(function(){
    return  search.getAllVideos(API_KEY,20)
             .then(data =>{
               console.log(data)
