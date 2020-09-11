@@ -100,11 +100,7 @@ a:hover{
   font-size: 27px;
 }
 
-.detailsLikesDislikes{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
+
 
 .channelInf{
   display: flex;

@@ -2,15 +2,14 @@ import $ from "jquery";
 import RenderResults from "./render";
 
 export default class VideoSearch {
-  constructor(key, searchText) {
+  constructor(key) {
     this.key = key;
-    this.searchText = searchText;
   }
 
-  getAllVideos(key, text, maxRes) {
+  getAllVideos( text, maxRes) {
     return $.get(`https://www.googleapis.com/youtube/v3/search`, {
       part: "snippet",
-      key: key,
+      key: this.key,
       type: "video",
       order: "viewCount",
       maxResults: maxRes,
@@ -18,11 +17,11 @@ export default class VideoSearch {
     }).fail((err) => console.log(`Что-то пошло не так ${err}`));
   }
 
-  getVideoById(key,videoId){
+  getVideoById(videoId){
     return $.get(`https://www.googleapis.com/youtube/v3/videos`,{
-      part: "snippet",
-      key: key,
+      part: "snippet, contentDetails, statistics",
+      key: this.key,
       id: videoId
-    })
+    }).fail((err) => console.log(`Что-то пошло не так ${err.status}`));
   }
 }

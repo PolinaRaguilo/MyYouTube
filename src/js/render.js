@@ -8,7 +8,19 @@ class Render {
     const renderList = new RenderListVideo(data);
     this.$element.html('').append(renderList.$element)
   }
-
+  addDetails(data) {
+    const renderVideoDetails = new RenderDetailsOfVideo(data);
+    this.$element.html('').append(renderVideoDetails.$element);
+  }
+  addClickOnVideo(cb){
+    this.$element.on('click','h3', e => {
+      e.preventDefault();
+      //let target = e.target;
+      let id = $(e.target).closest('.oneVideoBlock').attr('data-id')
+      console.log(id)
+      cb(id)
+    } )
+  }
 }
 
 class RenderListVideo {
@@ -18,7 +30,7 @@ class RenderListVideo {
     const out = this.data.items.reduce((acc, item) =>{
       const{
         id: {
-          idVideo
+          videoId
         },
         snippet: {
           channelTitle,
@@ -31,60 +43,61 @@ class RenderListVideo {
           }
         } 
       } = item;
-     acc += ` <div class="oneVideoBlock">
-          <div class="imgVideo">
+     acc += ` <div class="oneVideoBlock" data-id="${videoId}">
             <img src="${url}" alt="" class="littleVideos"/>
-          </div>
-          <div class="detailsInf">
-            <a href='#'><h3 class="titleMain">${title}</h3></a>
+          <div class="detailsInf" >
+          <h3 class="titleMain"><a href='#'>${title}</a></h3>
             <h2>Channel: ${channelTitle}</h2>
-            <div class="channelInf"></div>
-            <div class="detailsLikesDislikes">
-            </div>
+            <h3><i class="fas fa-calendar-alt"></i> ${publishedAt}</h3>
           </div>
         </div>`;
         return acc;  
     }, '');
     this.$element = `<div id="videoList" > ${out}</div>`
-    console.log(this.$element)
+    //console.log(this.$element)
 
   }
 }
 
- class RenderResults {
-  constructor(videoId, title) {
-    this.videoId = videoId;
-    this.title = title;
+class RenderDetailsOfVideo{
+  constructor(data) {
+    this.data = data;
+
+    const {
+      id: videoId,
+      snippet: {
+        channelTitle,
+        description,
+        title,
+        publishedAt,
+      },
+      statistics: {
+        commentCount,
+        dislikeCount,
+        likeCount,
+        viewCount
+      }
+    } = data.items[0];
+
+    const videoDetails = `<div data-id="${videoId}">
+              <iframe src="http://www.youtube.com/embed/${videoId}"></iframe>
+            <div>
+          
+            <div>
+              <h2>${title}</h2>
+              <p>Channel: ${channelTitle}</p> on ${publishedAt}
+              <p>${description}</p>
+              <p>${title}</p>
+              <h3><i class="fas fa-thumbs-up"></i>  ${likeCount}</h3>
+              <h3><i class="fas fa-thumbs-down"></i> ${dislikeCount}</h3>
+              <h3><i class="fas fa-comments"></i>${commentCount}</h3>
+              <h3><i class="fas fa-eye"></i> ${viewCount}</h3>
+            </div>`
+    this.$element = `<div id="videoList">${videoDetails}</div>`
   }
-
-  showListVideos(urlImg, title, channelTitle){
-    let list = `
-        <div class="oneVideoBlock">
-          <div class="imgVideo">
-            <img src="${urlImg}" alt="" class="littleVideos"/>
-          </div>
-          <div class="detailsInf">
-            <a href='#'><h3 class="titleMain">${title}</h3></a>
-            <h2>Channel: ${channelTitle}</h2>
-            <div class="channelInf"></div>
-            <div class="detailsLikesDislikes">
-            </div>
-          </div>
-        </div>
-        `
-    return list;
-  }
-  
-  // showSingleStatistic(likes, dislikes, views){
-  //   let statistic = `
-  //         <h3><i class="fas fa-thumbs-up"></i>  ${likes}</h3>
-  //         <h3><i class="fas fa-thumbs-down"></i> ${dislikes}</h3>
-  //         <h3><i class="fas fa-eye"></i> ${views}</h3>
-  //       `
-  //   return statistic;
-  // }
-
-
 }
+ 
+
+
 
 export default  Render;
