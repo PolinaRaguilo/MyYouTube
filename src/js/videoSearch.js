@@ -6,7 +6,7 @@ export default class VideoSearch {
     this.key = key;
   }
 
-  getAllVideos( text, maxRes) {
+  getAllVideos( text , maxRes) {
     return $.get(`https://www.googleapis.com/youtube/v3/search`, {
       part: "snippet",
       key: this.key,
@@ -21,7 +21,7 @@ export default class VideoSearch {
     return $.get(`https://www.googleapis.com/youtube/v3/videos`,{
       part: "snippet, contentDetails, statistics",
       key: this.key,
-      id: videoId
+      id: videoId,
     }).fail((err) => console.log(`Что-то пошло не так ${err.status}`));
   }
 }

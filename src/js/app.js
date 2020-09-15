@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import FormHandler from './formHandler';
 import VideoSearch from './videoSearch';
-import RenderResults from './render';
 import Render from './render';
 
 
@@ -21,9 +20,8 @@ let render = new Render(divVideo)
 formHandler.formSubmit(function(text){
    return  search.getAllVideos(text, 20)
             .then(data =>{
-             console.log(data)
+             //console.log(data)
               render.addRow(data)
-              //search.getVideoById(API_KEY, 'pdthy62X-xA').then(data => console.log(data))
             })
 
 });
@@ -31,6 +29,7 @@ formHandler.formSubmit(function(text){
 render.addClickOnVideo(function(id) {
   return search.getVideoById(id)
                 .then(data => {
+                  console.log(data)
                   render.addDetails(data)
                 })
 })

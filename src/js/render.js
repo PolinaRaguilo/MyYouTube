@@ -1,5 +1,8 @@
 import $ from 'jquery';
 
+import moment from 'moment';
+moment.locale('ru')
+
 class Render {
   constructor(selector) {
     this.$element = $(selector);
@@ -13,9 +16,8 @@ class Render {
     this.$element.html('').append(renderVideoDetails.$element);
   }
   addClickOnVideo(cb){
-    this.$element.on('click','h3', e => {
+    this.$element.on('click',['h3','img'], e => {
       e.preventDefault();
-      //let target = e.target;
       let id = $(e.target).closest('.oneVideoBlock').attr('data-id')
       console.log(id)
       cb(id)
@@ -44,11 +46,11 @@ class RenderListVideo {
         } 
       } = item;
      acc += ` <div class="oneVideoBlock" data-id="${videoId}">
-            <img src="${url}" alt="" class="littleVideos"/>
+            <img src="${url}" alt="videoImg" class="littleVideos" />
           <div class="detailsInf" >
-          <h3 class="titleMain"><a href='#'>${title}</a></h3>
-            <h2>Channel: ${channelTitle}</h2>
-            <h3><i class="fas fa-calendar-alt"></i> ${publishedAt}</h3>
+            <h3 class="titleMain"><a href='#'>${title}</a></h3>
+            <h2><i class="fas fa-user-circle"></i> ${channelTitle}</h2>
+            <p class="dataPublished"><i class="fas fa-calendar-alt"></i> ${moment(publishedAt).format('LL')}</p>
           </div>
         </div>`;
         return acc;  
@@ -79,19 +81,24 @@ class RenderDetailsOfVideo{
       }
     } = data.items[0];
 
-    const videoDetails = `<div data-id="${videoId}">
-              <iframe src="http://www.youtube.com/embed/${videoId}"></iframe>
+    const videoDetails = `<div data-id="${videoId}" class="videoDetails">
+           
+              <iframe src="http://www.youtube.com/embed/${videoId}" class="videoplayer" allowfullscreen ></iframe>
+            
             <div>
           
-            <div>
-              <h2>${title}</h2>
-              <p>Channel: ${channelTitle}</p> on ${publishedAt}
-              <p>${description}</p>
-              <p>${title}</p>
-              <h3><i class="fas fa-thumbs-up"></i>  ${likeCount}</h3>
-              <h3><i class="fas fa-thumbs-down"></i> ${dislikeCount}</h3>
-              <h3><i class="fas fa-comments"></i>${commentCount}</h3>
-              <h3><i class="fas fa-eye"></i> ${viewCount}</h3>
+            <div class="allDetails">
+              <h2 class="detailsTitle">${title}</h2>
+              <div class="statistics">
+                <h3><i class="fas fa-thumbs-up"></i>  ${likeCount}</h3>
+                <h3><i class="fas fa-thumbs-down"></i> ${dislikeCount}</h3>
+                <h3><i class="fas fa-comments"></i>${commentCount}</h3>
+                <h3><i class="fas fa-eye"></i> ${viewCount}</h3>
+              </div>
+              <div class="channelPublished">
+                <p class="channelDetails"><i class="fas fa-user-circle"></i> ${channelTitle}</p> <p class="dataPublished"><i class="fas fa-calendar-alt"></i> ${moment(publishedAt).format('LL')}</p>
+              </div>
+              <p class="descriptionDetails">${description}</p>
             </div>`
     this.$element = `<div id="videoList">${videoDetails}</div>`
   }

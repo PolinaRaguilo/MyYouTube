@@ -24,7 +24,7 @@
   border: none;
   outline: none;
   border-radius: 3px;
-  width: 45%;
+  width: 35%;
   height: 42px;
   background: #F9F0DA;
   padding-left: 15px;
@@ -86,22 +86,72 @@ a:hover{
 }
 
 .fa-thumbs-up::before{
-  color: grey;
+  color: #FF0000;
   font-size: 27px;
 }
 
 .fa-thumbs-down::before{
-  color: grey;
+  color: #474444;
   font-size: 27px;
+}
+
+.fa-comments:before {
+  font-size: 27px;
+  color: #C42081;
 }
 
 .fa-eye::before{
-  color: grey;
+  color: #115C95;
   font-size: 27px;
 }
 
-
-
-.channelInf{
-  display: flex;
+.dataPublished{
+  font-size: 20px;
+  font-weight: bold;
 }
+
+.videoDetails{
+  width: 55%;
+  margin: 0 auto;
+}
+
+.videoFrame{
+  margin: 20px 0px 10px 40px;
+}
+
+.videoplayer{
+  margin: 20px 0px 10px 90px;
+  width: 80%;
+  height: 350px;
+}
+
+.detailsTitle{
+  margin-right: 10px;
+}
+
+.allDetails{
+  margin-left: 36px;
+}
+
+.detailsTitle{
+  text-align: center;
+}
+
+.statistics{
+  display: flex;
+  justify-content: space-around;
+}
+
+.channelPublished{
+  display: flex;
+  justify-content: space-around;
+}
+
+.descriptionDetails{
+  text-align: center;
+}
+
+.fas{
+  font-size: 27px;
+}
+
