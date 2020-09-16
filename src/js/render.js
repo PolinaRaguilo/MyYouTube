@@ -81,6 +81,8 @@ class RenderDetailsOfVideo{
       }
     } = data.items[0];
 
+    
+
     const videoDetails = `<div data-id="${videoId}" class="videoDetails">
            
               <iframe src="http://www.youtube.com/embed/${videoId}" class="videoplayer" allowfullscreen ></iframe>

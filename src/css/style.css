@@ -155,3 +155,16 @@ a:hover{
   font-size: 27px;
 }
 
+.btn_back{
+  width: 105px;
+  height: 30px;
+  color: white;
+  background-color: #FB0148;
+  border: 0;
+  display: none;
+}
+
+.active{
+  display: inline-block;
+}
+
